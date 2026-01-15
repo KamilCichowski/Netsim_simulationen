@@ -1,8 +1,8 @@
-# 0 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/main.cpp"
+# 0 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/helpers.cpp"
 # 1 "C:\\Users\\rjczm\\Documents\\GitHub\\Netsim_simulationen\\cmake-build-debug//"
 # 0 "<built-in>"
 # 0 "<command-line>"
-# 1 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/main.cpp"
+# 1 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/helpers.cpp"
 # 1 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/helpers.hxx" 1
 
 
@@ -66700,17 +66700,729 @@ public:
 private:
     TimeOffset interval_;
 };
-# 2 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/main.cpp" 2
+# 2 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/helpers.cpp" 2
 # 1 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/factory.hxx" 1
-# 3 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/main.cpp" 2
+# 3 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/helpers.cpp" 2
 
-int main() {
-    Factory factory;
+# 1 "C:/msys64/ucrt64/include/c++/14.2.0/cstdlib" 1 3
+# 39 "C:/msys64/ucrt64/include/c++/14.2.0/cstdlib" 3
+       
+# 40 "C:/msys64/ucrt64/include/c++/14.2.0/cstdlib" 3
+# 5 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/helpers.cpp" 2
 
 
-    simulate(factory, 5,
-        [](Factory&, Time) {
+# 1 "C:/msys64/ucrt64/include/c++/14.2.0/stdexcept" 1 3
+# 36 "C:/msys64/ucrt64/include/c++/14.2.0/stdexcept" 3
+       
+# 37 "C:/msys64/ucrt64/include/c++/14.2.0/stdexcept" 3
 
-        }
-    );
+# 1 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 1 3
+# 33 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 3
+       
+# 34 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 3
+
+
+
+
+
+# 1 "C:/msys64/ucrt64/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "C:/msys64/ucrt64/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "C:/msys64/ucrt64/include/c++/14.2.0/bits/version.h" 3
+# 40 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 2 3
+
+
+# 41 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 3
+extern "C++" {
+
+namespace std
+{
+# 54 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 3
+  class bad_exception : public exception
+  {
+  public:
+    bad_exception() noexcept { }
+
+
+
+    virtual ~bad_exception() noexcept;
+
+
+    virtual const char*
+    what() const noexcept;
+  };
+
+
+  typedef void (*terminate_handler) ();
+
+
+  terminate_handler set_terminate(terminate_handler) noexcept;
+
+
+
+  terminate_handler get_terminate() noexcept;
+
+
+
+
+  void terminate() noexcept __attribute__ ((__noreturn__,__cold__));
+
+
+
+  typedef void (*__attribute__ ((__deprecated__)) unexpected_handler) ();
+
+
+
+
+
+  __attribute__ ((__deprecated__))
+  unexpected_handler set_unexpected(unexpected_handler) noexcept;
+
+
+
+
+
+
+
+  __attribute__ ((__deprecated__))
+  unexpected_handler get_unexpected() noexcept;
+
+
+
+
+
+
+
+  __attribute__ ((__deprecated__))
+  void unexpected() __attribute__ ((__noreturn__,__cold__));
+# 124 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 3
+  __attribute__ ((__deprecated__ ("use '" "std::uncaught_exceptions()" "' instead")))
+  bool uncaught_exception() noexcept __attribute__ ((__pure__));
+
+
+
+
+
+
+  int uncaught_exceptions() noexcept __attribute__ ((__pure__));
+
+
+
+}
+
+namespace __gnu_cxx
+{
+
+# 158 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 3
+  void __verbose_terminate_handler();
+
+
+}
+
+}
+
+
+# 1 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 1 3
+# 36 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 3
+# 1 "C:/msys64/ucrt64/include/c++/14.2.0/bits/cxxabi_init_exception.h" 1 3
+# 34 "C:/msys64/ucrt64/include/c++/14.2.0/bits/cxxabi_init_exception.h" 3
+       
+# 35 "C:/msys64/ucrt64/include/c++/14.2.0/bits/cxxabi_init_exception.h" 3
+
+#pragma GCC visibility push(default)
+
+# 1 "C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h" 1 3 4
+# 1 "C:/msys64/ucrt64/include/stddef.h" 1 3 4
+# 2 "C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h" 2 3 4
+# 39 "C:/msys64/ucrt64/include/c++/14.2.0/bits/cxxabi_init_exception.h" 2 3
+# 50 "C:/msys64/ucrt64/include/c++/14.2.0/bits/cxxabi_init_exception.h" 3
+namespace std
+{
+  class type_info;
+}
+
+namespace __cxxabiv1
+{
+  struct __cxa_refcounted_exception;
+
+  extern "C"
+    {
+
+      void*
+      __cxa_allocate_exception(size_t) noexcept;
+
+      void
+      __cxa_free_exception(void*) noexcept;
+
+
+      __cxa_refcounted_exception*
+      __cxa_init_primary_exception(void *__object, std::type_info *__tinfo,
+                void ( *__dest) (void *))
+ noexcept;
+
+    }
+}
+
+
+
+#pragma GCC visibility pop
+# 37 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 2 3
+# 50 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 3
+extern "C++" {
+
+namespace std
+{
+  class type_info;
+
+
+
+
+
+
+  namespace __exception_ptr
+  {
+    class exception_ptr;
+  }
+
+  using __exception_ptr::exception_ptr;
+# 75 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 3
+  exception_ptr current_exception() noexcept;
+
+  template<typename _Ex>
+  exception_ptr make_exception_ptr(_Ex) noexcept;
+
+
+  void rethrow_exception(exception_ptr) __attribute__ ((__noreturn__));
+
+  namespace __exception_ptr
+  {
+    using std::rethrow_exception;
+# 97 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 3
+    class exception_ptr
+    {
+      void* _M_exception_object;
+
+      explicit exception_ptr(void* __e) noexcept;
+
+      void _M_addref() noexcept;
+      void _M_release() noexcept;
+
+      void *_M_get() const noexcept __attribute__ ((__pure__));
+
+      friend exception_ptr std::current_exception() noexcept;
+      friend void std::rethrow_exception(exception_ptr);
+      template<typename _Ex>
+      friend exception_ptr std::make_exception_ptr(_Ex) noexcept;
+
+    public:
+      exception_ptr() noexcept;
+
+      exception_ptr(const exception_ptr&) noexcept;
+
+
+      exception_ptr(nullptr_t) noexcept
+      : _M_exception_object(nullptr)
+      { }
+
+      exception_ptr(exception_ptr&& __o) noexcept
+      : _M_exception_object(__o._M_exception_object)
+      { __o._M_exception_object = nullptr; }
+# 135 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 3
+      exception_ptr&
+      operator=(const exception_ptr&) noexcept;
+
+
+      exception_ptr&
+      operator=(exception_ptr&& __o) noexcept
+      {
+        exception_ptr(static_cast<exception_ptr&&>(__o)).swap(*this);
+        return *this;
+      }
+
+
+      ~exception_ptr() noexcept;
+
+      void
+      swap(exception_ptr&) noexcept;
+# 162 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 3
+      explicit operator bool() const noexcept
+      { return _M_exception_object; }
+
+
+
+
+      friend bool
+      operator==(const exception_ptr&, const exception_ptr&) noexcept = default;
+# 182 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 3
+      const class std::type_info*
+      __cxa_exception_type() const noexcept
+ __attribute__ ((__pure__));
+    };
+
+   
+    inline
+    exception_ptr::exception_ptr() noexcept
+    : _M_exception_object(0)
+    { }
+
+   
+    inline
+    exception_ptr::exception_ptr(const exception_ptr& __other)
+    noexcept
+    : _M_exception_object(__other._M_exception_object)
+    {
+      if (_M_exception_object)
+ _M_addref();
+    }
+
+   
+    inline
+    exception_ptr::~exception_ptr() noexcept
+    {
+      if (_M_exception_object)
+ _M_release();
+    }
+
+   
+    inline exception_ptr&
+    exception_ptr::operator=(const exception_ptr& __other) noexcept
+    {
+      exception_ptr(__other).swap(*this);
+      return *this;
+    }
+
+   
+    inline void
+    exception_ptr::swap(exception_ptr &__other) noexcept
+    {
+      void *__tmp = _M_exception_object;
+      _M_exception_object = __other._M_exception_object;
+      __other._M_exception_object = __tmp;
+    }
+
+
+    inline void
+    swap(exception_ptr& __lhs, exception_ptr& __rhs)
+    { __lhs.swap(__rhs); }
+
+
+    template<typename _Ex>
+     
+      inline void
+      __dest_thunk(void* __x)
+      { static_cast<_Ex*>(__x)->~_Ex(); }
+
+
+  }
+
+  using __exception_ptr::swap;
+
+
+
+  template<typename _Ex>
+    exception_ptr
+    make_exception_ptr(_Ex __ex) noexcept
+    {
+
+      using _Ex2 = typename decay<_Ex>::type;
+      void* __e = __cxxabiv1::__cxa_allocate_exception(sizeof(_Ex));
+      (void) __cxxabiv1::__cxa_init_primary_exception(
+   __e, const_cast<std::type_info*>(&typeid(_Ex)),
+   __exception_ptr::__dest_thunk<_Ex2>);
+      try
+ {
+   ::new (__e) _Ex2(__ex);
+   return exception_ptr(__e);
+ }
+      catch(...)
+ {
+   __cxxabiv1::__cxa_free_exception(__e);
+   return current_exception();
+ }
+# 277 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 3
+    }
+# 291 "C:/msys64/ucrt64/include/c++/14.2.0/bits/exception_ptr.h" 3
+}
+
+}
+# 167 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 2 3
+# 1 "C:/msys64/ucrt64/include/c++/14.2.0/bits/nested_exception.h" 1 3
+# 40 "C:/msys64/ucrt64/include/c++/14.2.0/bits/nested_exception.h" 3
+extern "C++" {
+
+namespace std
+{
+# 59 "C:/msys64/ucrt64/include/c++/14.2.0/bits/nested_exception.h" 3
+  class nested_exception
+  {
+    exception_ptr _M_ptr;
+
+  public:
+
+    nested_exception() noexcept : _M_ptr(current_exception()) { }
+
+    nested_exception(const nested_exception&) noexcept = default;
+
+    nested_exception& operator=(const nested_exception&) noexcept = default;
+
+    virtual ~nested_exception() noexcept;
+
+
+    [[noreturn]]
+    void
+    rethrow_nested() const
+    {
+      if (_M_ptr)
+ rethrow_exception(_M_ptr);
+      std::terminate();
+    }
+
+
+    exception_ptr
+    nested_ptr() const noexcept
+    { return _M_ptr; }
+  };
+
+
+
+  template<typename _Except>
+    struct _Nested_exception : public _Except, public nested_exception
+    {
+      explicit _Nested_exception(const _Except& __ex)
+      : _Except(__ex)
+      { }
+
+      explicit _Nested_exception(_Except&& __ex)
+      : _Except(static_cast<_Except&&>(__ex))
+      { }
+    };
+# 145 "C:/msys64/ucrt64/include/c++/14.2.0/bits/nested_exception.h" 3
+  template<typename _Tp>
+    [[noreturn]]
+    inline void
+    throw_with_nested(_Tp&& __t)
+    {
+      using _Up = typename decay<_Tp>::type;
+      using _CopyConstructible
+ = __and_<is_copy_constructible<_Up>, is_move_constructible<_Up>>;
+      static_assert(_CopyConstructible::value,
+   "throw_with_nested argument must be CopyConstructible");
+
+
+      if constexpr (is_class_v<_Up>)
+ if constexpr (!is_final_v<_Up>)
+   if constexpr (!is_base_of_v<nested_exception, _Up>)
+     throw _Nested_exception<_Up>{std::forward<_Tp>(__t)};
+      throw std::forward<_Tp>(__t);
+
+
+
+
+
+    }
+# 203 "C:/msys64/ucrt64/include/c++/14.2.0/bits/nested_exception.h" 3
+  template<typename _Ex>
+
+
+
+    inline void
+    rethrow_if_nested(const _Ex& __ex)
+    {
+      const _Ex* __ptr = __builtin_addressof(__ex);
+# 223 "C:/msys64/ucrt64/include/c++/14.2.0/bits/nested_exception.h" 3
+      if constexpr (!is_polymorphic_v<_Ex>)
+ return;
+      else if constexpr (is_base_of_v<nested_exception, _Ex>
+    && !is_convertible_v<_Ex*, nested_exception*>)
+ return;
+
+
+
+
+      else if (auto __ne_ptr = dynamic_cast<const nested_exception*>(__ptr))
+ __ne_ptr->rethrow_nested();
+
+    }
+
+
+}
+
+}
+# 168 "C:/msys64/ucrt64/include/c++/14.2.0/exception" 2 3
+# 39 "C:/msys64/ucrt64/include/c++/14.2.0/stdexcept" 2 3
+
+
+namespace std
+{
+
+
+
+
+
+  struct __cow_string
+  {
+    union {
+      const char* _M_p;
+      char _M_bytes[sizeof(const char*)];
+    };
+
+    __cow_string();
+    __cow_string(const std::string&);
+    __cow_string(const char*, size_t);
+    __cow_string(const __cow_string&) noexcept;
+    __cow_string& operator=(const __cow_string&) noexcept;
+    ~__cow_string();
+
+    __cow_string(__cow_string&&) noexcept;
+    __cow_string& operator=(__cow_string&&) noexcept;
+
+  };
+
+  typedef basic_string<char> __sso_string;
+# 113 "C:/msys64/ucrt64/include/c++/14.2.0/stdexcept" 3
+  class logic_error : public exception
+  {
+    __cow_string _M_msg;
+
+  public:
+
+    explicit
+    logic_error(const string& __arg) ;
+
+
+    explicit
+    logic_error(const char*) ;
+
+    logic_error(logic_error&&) noexcept;
+    logic_error& operator=(logic_error&&) noexcept;
+
+
+
+    logic_error(const logic_error&) noexcept;
+    logic_error& operator=(const logic_error&) noexcept;
+
+
+
+
+
+    virtual ~logic_error() noexcept;
+
+
+
+    virtual const char*
+    what() const noexcept;
+
+
+
+
+
+  };
+
+
+
+  class domain_error : public logic_error
+  {
+  public:
+    explicit domain_error(const string& __arg) ;
+
+    explicit domain_error(const char*) ;
+    domain_error(const domain_error&) = default;
+    domain_error& operator=(const domain_error&) = default;
+    domain_error(domain_error&&) = default;
+    domain_error& operator=(domain_error&&) = default;
+
+    virtual ~domain_error() noexcept;
+  };
+
+
+  class invalid_argument : public logic_error
+  {
+  public:
+    explicit invalid_argument(const string& __arg) ;
+
+    explicit invalid_argument(const char*) ;
+    invalid_argument(const invalid_argument&) = default;
+    invalid_argument& operator=(const invalid_argument&) = default;
+    invalid_argument(invalid_argument&&) = default;
+    invalid_argument& operator=(invalid_argument&&) = default;
+
+    virtual ~invalid_argument() noexcept;
+  };
+
+
+
+  class length_error : public logic_error
+  {
+  public:
+    explicit length_error(const string& __arg) ;
+
+    explicit length_error(const char*) ;
+    length_error(const length_error&) = default;
+    length_error& operator=(const length_error&) = default;
+    length_error(length_error&&) = default;
+    length_error& operator=(length_error&&) = default;
+
+    virtual ~length_error() noexcept;
+  };
+
+
+
+  class out_of_range : public logic_error
+  {
+  public:
+    explicit out_of_range(const string& __arg) ;
+
+    explicit out_of_range(const char*) ;
+    out_of_range(const out_of_range&) = default;
+    out_of_range& operator=(const out_of_range&) = default;
+    out_of_range(out_of_range&&) = default;
+    out_of_range& operator=(out_of_range&&) = default;
+
+    virtual ~out_of_range() noexcept;
+  };
+
+
+
+
+
+
+  class runtime_error : public exception
+  {
+    __cow_string _M_msg;
+
+  public:
+
+    explicit
+    runtime_error(const string& __arg) ;
+
+
+    explicit
+    runtime_error(const char*) ;
+
+    runtime_error(runtime_error&&) noexcept;
+    runtime_error& operator=(runtime_error&&) noexcept;
+
+
+
+    runtime_error(const runtime_error&) noexcept;
+    runtime_error& operator=(const runtime_error&) noexcept;
+
+
+
+
+
+    virtual ~runtime_error() noexcept;
+
+
+
+    virtual const char*
+    what() const noexcept;
+
+
+
+
+
+  };
+
+
+  class range_error : public runtime_error
+  {
+  public:
+    explicit range_error(const string& __arg) ;
+
+    explicit range_error(const char*) ;
+    range_error(const range_error&) = default;
+    range_error& operator=(const range_error&) = default;
+    range_error(range_error&&) = default;
+    range_error& operator=(range_error&&) = default;
+
+    virtual ~range_error() noexcept;
+  };
+
+
+  class overflow_error : public runtime_error
+  {
+  public:
+    explicit overflow_error(const string& __arg) ;
+
+    explicit overflow_error(const char*) ;
+    overflow_error(const overflow_error&) = default;
+    overflow_error& operator=(const overflow_error&) = default;
+    overflow_error(overflow_error&&) = default;
+    overflow_error& operator=(overflow_error&&) = default;
+
+    virtual ~overflow_error() noexcept;
+  };
+
+
+  class underflow_error : public runtime_error
+  {
+  public:
+    explicit underflow_error(const string& __arg) ;
+
+    explicit underflow_error(const char*) ;
+    underflow_error(const underflow_error&) = default;
+    underflow_error& operator=(const underflow_error&) = default;
+    underflow_error(underflow_error&&) = default;
+    underflow_error& operator=(underflow_error&&) = default;
+
+    virtual ~underflow_error() noexcept;
+  };
+
+
+
+
+}
+# 8 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/helpers.cpp" 2
+
+
+
+
+
+# 12 "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/helpers.cpp"
+std::random_device rd;
+std::mt19937 rng(rd());
+
+double default_probability_generator() {
+
+    return std::generate_canonical<double, 10>(rng);
+}
+
+std::function<double()> probability_generator = default_probability_generator;
+
+
+
+SpecificTurnsReportNotifier::SpecificTurnsReportNotifier(
+    const std::set<Time>& turns
+) : turns_(turns) {}
+
+bool SpecificTurnsReportNotifier::should_generate_report(Time t) const {
+    return turns_.find(t) != turns_.end();
+}
+
+
+
+IntervalReportNotifier::IntervalReportNotifier(TimeOffset interval)
+    : interval_(interval) {}
+
+bool IntervalReportNotifier::should_generate_report(Time t) const {
+    return (t - 1) % interval_ == 0;
+}
+
+
+
+
+void simulate(
+    Factory& factory,
+    TimeOffset duration,
+    std::function<void(Factory&, Time)> report_function
+) {
+    if (!factory.is_consistent()) {
+        throw std::logic_error("Factory network is inconsistent");
+    }
+
+    for (Time t = 1; t <= duration; ++t) {
+        factory.do_turn();
+        report_function(factory, t);
+    }
 }

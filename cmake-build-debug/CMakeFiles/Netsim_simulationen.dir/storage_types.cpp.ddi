@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles/Netsim_simulationen.dir/storage_types.cpp.o",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}
