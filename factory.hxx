@@ -3,6 +3,9 @@
 #include <list>
 #include <algorithm>
 #include <utility>
+#include <map>
+#include <stdexcept>
+#include"nodes.hxx"
 
 template <typename Node>
 class NodeCollection {
@@ -45,8 +48,6 @@ private:
     container_t collection_;
 };
 
-#include <map>
-#include <stdexcept>
 
 class Factory {
 public:
@@ -57,6 +58,18 @@ public:
     NodeCollection<Ramp>::const_iterator find_ramp_by_id(ElementID id) const;
     NodeCollection<Ramp>::const_iterator ramp_cbegin() const;
     NodeCollection<Ramp>::const_iterator ramp_cend() const;
+
+    // Workerzy – iteratory
+    NodeCollection<Worker>::const_iterator worker_cbegin() const;
+    NodeCollection<Worker>::const_iterator worker_cend() const;
+
+    // Magazyny – iteratory
+    NodeCollection<Storehouse>::const_iterator storehouse_cbegin() const;
+    NodeCollection<Storehouse>::const_iterator storehouse_cend() const;
+
+    // Szukanie magazynu
+    NodeCollection<Storehouse>::iterator find_storehouse_by_id(ElementID id);
+    NodeCollection<Storehouse>::const_iterator find_storehouse_by_id(ElementID id) const;
 
     // Robotnicy
     void add_worker(Worker&& w);

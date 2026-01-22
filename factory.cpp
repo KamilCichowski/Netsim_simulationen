@@ -24,6 +24,30 @@ NodeCollection<Ramp>::const_iterator Factory::ramp_cend() const {
     return ramps_.cend();
 }
 
+NodeCollection<Worker>::const_iterator Factory::worker_cbegin() const {
+    return workers_.cbegin();
+}
+
+NodeCollection<Worker>::const_iterator Factory::worker_cend() const {
+    return workers_.cend();
+}
+
+NodeCollection<Storehouse>::const_iterator Factory::storehouse_cbegin() const {
+    return storehouses_.cbegin();
+}
+
+NodeCollection<Storehouse>::const_iterator Factory::storehouse_cend() const {
+    return storehouses_.cend();
+}
+
+NodeCollection<Storehouse>::iterator Factory::find_storehouse_by_id(ElementID id) {
+    return storehouses_.find_by_id(id);
+}
+
+NodeCollection<Storehouse>::const_iterator Factory::find_storehouse_by_id(ElementID id) const {
+    return storehouses_.find_by_id(id);
+}
+
 void Factory::add_worker(Worker&& w) {
     workers_.add(std::move(w));
 }
