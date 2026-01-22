@@ -47,19 +47,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\cichy\Documents\GitHub\Netsim_simulationen
+CMAKE_SOURCE_DIR = C:\Users\Robert\OneDrive\Dokumenty\GitHub\Netsim_simulationen
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\cichy\Documents\GitHub\Netsim_simulationen\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Robert\OneDrive\Dokumenty\GitHub\Netsim_simulationen\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,7 +67,7 @@ CMAKE_BINARY_DIR = C:\Users\cichy\Documents\GitHub\Netsim_simulationen\cmake-bui
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
-	"C:\Program Files\JetBrains\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	"C:\Program Files\JetBrains\CLion\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -77,7 +77,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	"C:\Program Files\JetBrains\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"C:\Program Files\JetBrains\CLion\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\cichy\Documents\GitHub\Netsim_simulationen\cmake-build-debug\CMakeFiles C:\Users\cichy\Documents\GitHub\Netsim_simulationen\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Robert\OneDrive\Dokumenty\GitHub\Netsim_simulationen\cmake-build-debug\CMakeFiles C:\Users\Robert\OneDrive\Dokumenty\GitHub\Netsim_simulationen\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\cichy\Documents\GitHub\Netsim_simulationen\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Robert\OneDrive\Dokumenty\GitHub\Netsim_simulationen\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -128,6 +128,30 @@ Netsim_simulationen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/build
 .PHONY : Netsim_simulationen/fast
 
+helpers.obj: helpers.cpp.obj
+.PHONY : helpers.obj
+
+# target to build an object file
+helpers.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/helpers.cpp.obj
+.PHONY : helpers.cpp.obj
+
+helpers.i: helpers.cpp.i
+.PHONY : helpers.i
+
+# target to preprocess a source file
+helpers.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/helpers.cpp.i
+.PHONY : helpers.cpp.i
+
+helpers.s: helpers.cpp.s
+.PHONY : helpers.s
+
+# target to generate assembly for a file
+helpers.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/helpers.cpp.s
+.PHONY : helpers.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -151,6 +175,30 @@ main.s: main.cpp.s
 main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+nodes.obj: nodes.cpp.obj
+.PHONY : nodes.obj
+
+# target to build an object file
+nodes.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/nodes.cpp.obj
+.PHONY : nodes.cpp.obj
+
+nodes.i: nodes.cpp.i
+.PHONY : nodes.i
+
+# target to preprocess a source file
+nodes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/nodes.cpp.i
+.PHONY : nodes.cpp.i
+
+nodes.s: nodes.cpp.s
+.PHONY : nodes.s
+
+# target to generate assembly for a file
+nodes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/nodes.cpp.s
+.PHONY : nodes.cpp.s
 
 package.obj: package.cpp.obj
 .PHONY : package.obj
@@ -209,9 +257,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Netsim_simulationen
+	@echo ... helpers.obj
+	@echo ... helpers.i
+	@echo ... helpers.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... nodes.obj
+	@echo ... nodes.i
+	@echo ... nodes.s
 	@echo ... package.obj
 	@echo ... package.i
 	@echo ... package.s

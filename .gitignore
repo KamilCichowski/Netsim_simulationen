@@ -69,3 +69,4 @@ Testing/
 .cache/
 cmake-build-debug/CMakeFiles/Netsim_simulationen.dir/CXXDependInfo.json
 *.json
+*.json

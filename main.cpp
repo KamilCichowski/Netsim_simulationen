@@ -1,6 +1,13 @@
-#include "gtest/gtest.h"
+#include "helpers.hxx"
+#include "factory.hxx"
 
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+int main() {
+    Factory factory;
+    // TODO: inicjalizacja factory
+
+    simulate(factory, 5,
+        [](Factory&, Time) {
+            // nic nie robimy
+        }
+    );
 }
