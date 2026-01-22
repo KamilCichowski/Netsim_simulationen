@@ -1,0 +1,18 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/cmake-build-debug",
+	"dir-cur-src" : "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen",
+	"dir-top-bld" : "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/cmake-build-debug",
+	"dir-top-src" : "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "C:/Users/rjczm/Documents/GitHub/Netsim_simulationen/cmake-build-debug/CMakeFiles/Netsim_simulationen.dir"
+}
