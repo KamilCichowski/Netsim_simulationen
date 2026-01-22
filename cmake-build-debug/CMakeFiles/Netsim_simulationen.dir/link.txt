@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\Netsim_simulationen.dir/objects.a
+C:\msys64\ucrt64\bin\ar.exe qc CMakeFiles\Netsim_simulationen.dir/objects.a @CMakeFiles\Netsim_simulationen.dir\objects1.rsp
+C:\msys64\ucrt64\bin\c++.exe -g -Wl,--whole-archive CMakeFiles\Netsim_simulationen.dir/objects.a -Wl,--no-whole-archive -o Netsim_simulationen.exe -Wl,--out-implib,libNetsim_simulationen.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Netsim_simulationen.dir\linkLibs.rsp

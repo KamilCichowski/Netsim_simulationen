@@ -1,67 +1,81 @@
 #include "factory.hxx"
 
-bool Factory::is_consistent() const {
-    return true;  // tymczasowo
+void Factory::add_ramp(Ramp&& r) {
+    ramps_.add(std::move(r));
 }
 
-void Factory::do_deliveries(Time t) {
-    for (auto& ramp : ramps_) {
-        ramp.deliver_goods(t);
-    }
+void Factory::remove_ramp(ElementID id) {
+    ramps_.remove_by_id(id);
 }
 
-void Factory::do_package_passing() {
-    for (auto& worker : workers_) {
-        worker.send_package();
-    }
+NodeCollection<Ramp>::iterator Factory::find_ramp_by_id(ElementID id) {
+    return ramps_.find_by_id(id);
 }
 
-void Factory::do_work(Time t) {
-    for (auto& worker : workers_) {
-        worker.do_work(t);
-    }
+NodeCollection<Ramp>::const_iterator Factory::find_ramp_by_id(ElementID id) const {
+    return ramps_.find_by_id(id);
 }
 
+NodeCollection<Ramp>::const_iterator Factory::ramp_cbegin() const {
+    return ramps_.cbegin();
+}
 
-bool Factory::has_reachable_storehouse(
+NodeCollection<Ramp>::const_iterator Factory::ramp_cend() const {
+    return ramps_.cend();
+}
+
+void Factory::add_worker(Worker&& w) {
+    workers_.add(std::move(w));
+}
+
+void Factory::add_storehouse(Storehouse&& s) {
+    storehouses_.add(std::move(s));
+}
+
+void Factory::remove_worker(ElementID id) {
+    remove_receiver(workers_, id);
+}
+
+void Factory::remove_storehouse(ElementID id) {
+    remove_receiver(storehouses_, id);
+}
+
+bool has_reachable_storehouse(
     const PackageSender* sender,
-    std::map<const PackageSender*, NodeColor>& node_colors
-) const {
-    if (node_colors[sender] == NodeColor::VERIFIED) {
+    std::map<const PackageSender*, NodeColor>& colors
+) {
+    if (colors[sender] == NodeColor::VERIFIED)
         return true;
-    }
 
-    node_colors[sender] = NodeColor::VISITED;
+    colors[sender] = NodeColor::VISITED;
 
-    const auto& receivers = sender->receiver_preferences_.get_preferences();
-    if (receivers.empty()) {
+    const auto& prefs = sender->receiver_preferences_;
+    if (prefs.empty()) {
         throw std::logic_error("Sender has no receivers");
     }
 
-    bool has_valid_receiver = false;
+    bool ok = false;
 
-    for (const auto& [receiver, _] : receivers) {
+    for (const auto& [receiver, _] : prefs) {
         if (receiver->get_receiver_type() == ReceiverType::STOREHOUSE) {
-            has_valid_receiver = true;
+            ok = true;
         } else {
-            auto worker_ptr = dynamic_cast<Worker*>(receiver);
-            auto sender_ptr = dynamic_cast<PackageSender*>(worker_ptr);
+            auto worker = dynamic_cast<Worker*>(receiver);
+            auto next = dynamic_cast<PackageSender*>(worker);
 
-            if (sender_ptr == sender) {
-                continue;
-            }
+            if (next == sender) continue;
 
-            has_valid_receiver = true;
+            ok = true;
 
-            if (node_colors[sender_ptr] == NodeColor::UNVISITED) {
-                has_reachable_storehouse(sender_ptr, node_colors);
+            if (colors[next] == NodeColor::UNVISITED) {
+                has_reachable_storehouse(next, colors);
             }
         }
     }
 
-    node_colors[sender] = NodeColor::VERIFIED;
+    colors[sender] = NodeColor::VERIFIED;
 
-    if (!has_valid_receiver) {
+    if (!ok) {
         throw std::logic_error("No reachable storehouse");
     }
 
@@ -69,22 +83,38 @@ bool Factory::has_reachable_storehouse(
 }
 
 bool Factory::is_consistent() const {
-    std::map<const PackageSender*, NodeColor> node_colors;
+    std::map<const PackageSender*, NodeColor> colors;
 
-    for (const auto& ramp : ramps_) {
-        node_colors[&ramp] = NodeColor::UNVISITED;
-    }
-    for (const auto& worker : workers_) {
-        node_colors[&worker] = NodeColor::UNVISITED;
-    }
+    for (const auto& r : ramps_)
+        colors[&r] = NodeColor::UNVISITED;
+
+    for (const auto& w : workers_)
+        colors[&w] = NodeColor::UNVISITED;
 
     try {
-        for (const auto& ramp : ramps_) {
-            has_reachable_storehouse(&ramp, node_colors);
+        for (const auto& r : ramps_) {
+            has_reachable_storehouse(&r, colors);
         }
     } catch (const std::logic_error&) {
         return false;
     }
 
     return true;
+}
+
+void Factory::do_deliveries(Time t) {
+    for (auto& r : ramps_) {
+        r.deliver_goods(t);
+    }
+}
+
+void Factory::do_package_passing() {
+    for (auto& r : ramps_) r.send_package();
+    for (auto& w : workers_) w.send_package();
+}
+
+void Factory::do_work(Time t) {
+    for (auto& w : workers_) {
+        w.do_work(t);
+    }
 }
