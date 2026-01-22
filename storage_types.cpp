@@ -1,5 +1,3 @@
-#pragma once
-
 #include "storage_types.hxx"
 #include <stdexcept>
 
