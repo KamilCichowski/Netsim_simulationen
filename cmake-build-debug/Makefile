@@ -56,10 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2024.3.4\bin\cmake\win\x64\bin\cmake.exe"
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\szyme\Documents\GITHUB\Netsim_simulationen
+CMAKE_SOURCE_DIR = C:\Users\cichy\Documents\GitHub\Netsim_simulationen
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\szyme\Documents\GITHUB\Netsim_simulationen\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\cichy\Documents\GitHub\Netsim_simulationen\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\szyme\Documents\GITHUB\Netsim_simulationen\cmake-build-debug\CMakeFiles C:\Users\szyme\Documents\GITHUB\Netsim_simulationen\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\cichy\Documents\GitHub\Netsim_simulationen\cmake-build-debug\CMakeFiles C:\Users\cichy\Documents\GitHub\Netsim_simulationen\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\szyme\Documents\GITHUB\Netsim_simulationen\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\cichy\Documents\GitHub\Netsim_simulationen\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,30 +176,6 @@ package.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/package.cpp.s
 .PHONY : package.cpp.s
 
-reports.obj: reports.cpp.obj
-.PHONY : reports.obj
-
-# target to build an object file
-reports.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/reports.cpp.obj
-.PHONY : reports.cpp.obj
-
-reports.i: reports.cpp.i
-.PHONY : reports.i
-
-# target to preprocess a source file
-reports.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/reports.cpp.i
-.PHONY : reports.cpp.i
-
-reports.s: reports.cpp.s
-.PHONY : reports.s
-
-# target to generate assembly for a file
-reports.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Netsim_simulationen.dir\build.make CMakeFiles/Netsim_simulationen.dir/reports.cpp.s
-.PHONY : reports.cpp.s
-
 storage_types.obj: storage_types.cpp.obj
 .PHONY : storage_types.obj
 
@@ -239,9 +215,6 @@ help:
 	@echo ... package.obj
 	@echo ... package.i
 	@echo ... package.s
-	@echo ... reports.obj
-	@echo ... reports.i
-	@echo ... reports.s
 	@echo ... storage_types.obj
 	@echo ... storage_types.i
 	@echo ... storage_types.s
