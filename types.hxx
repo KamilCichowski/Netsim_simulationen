@@ -1,6 +1,18 @@
-#include <functional>
+#pragma once
+
+#include <string>
 
 using ElementID = int;
-using Time = int;
-using TimeOffset = int;
-using ProbabilityGenerator = std::function<double()>;
+
+enum class PackageQueueType {
+    FIFO,
+    LIFO
+};
+
+inline std::string to_string(PackageQueueType type) {
+    switch (type) {
+        case PackageQueueType::FIFO: return "FIFO";
+        case PackageQueueType::LIFO: return "LIFO";
+    }
+    return "";
+}
