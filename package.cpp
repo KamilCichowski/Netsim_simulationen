@@ -12,10 +12,7 @@ ElementID Package::acquire_id() {
         return id;
     }
 
-    ElementID new_id = assigned_IDs_.empty()
-        ? 1
-        : (*assigned_IDs_.rbegin()) + 1;
-
+    ElementID new_id = assigned_IDs_.empty() ? 1 : (*assigned_IDs_.rbegin()) + 1;
     assigned_IDs_.insert(new_id);
     return new_id;
 }

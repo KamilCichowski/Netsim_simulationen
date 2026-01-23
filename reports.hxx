@@ -2,7 +2,6 @@
 #define REPORTS_HXX
 
 #include <iosfwd>
-
 #include "factory.hxx"
 #include "types.hxx"
 

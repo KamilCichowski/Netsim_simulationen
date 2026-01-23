@@ -3,14 +3,16 @@
 
 #include <functional>
 #include <random>
+#include <map>
+#include <iostream>
+#include <set>
+#include <numeric> // <--- DODANO TO (naprawia błąd std::accumulate)
 
 #include "types.hxx"
+#include "factory.hxx"
 
 enum class ElementType {
-    RAMP,
-    WORKER,
-    STOREHOUSE,
-    LINK
+    RAMP, WORKER, STOREHOUSE, LINK
 };
 
 struct ParsedLineData {
@@ -19,24 +21,17 @@ struct ParsedLineData {
 };
 
 ParsedLineData parse_line(const std::string& line);
-
 Factory load_factory_structure(std::istream& is);
 void save_factory_structure(const Factory& factory, std::ostream& os);
 
 extern std::random_device rd;
 extern std::mt19937 rng;
-
 extern double default_probability_generator();
 
+// Ta zmienna jest używana przez ReceiverPreferences
 extern ProbabilityGenerator probability_generator;
 
-class Factory;
-
-void simulate(
-    Factory& factory,
-    TimeOffset duration,
-    std::function<void(Factory&, Time)> report_function
-);
+void simulate(Factory& factory, TimeOffset duration, std::function<void(Factory&, Time)> report_function);
 
 class SpecificTurnsReportNotifier {
 public:
@@ -56,4 +51,4 @@ private:
     TimeOffset interval_;
 };
 
-#endif /* HELPERS_HPP_ */
+#endif // HELPERS_HPP_
