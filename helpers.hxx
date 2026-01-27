@@ -3,8 +3,14 @@
 
 #include <functional>
 #include <random>
+#include <map>
+#include <string>
+#include <set>
+#include <iosfwd>
 
 #include "types.hxx"
+
+class Factory;
 
 enum class ElementType {
     RAMP,
@@ -29,8 +35,6 @@ extern std::mt19937 rng;
 extern double default_probability_generator();
 
 extern ProbabilityGenerator probability_generator;
-
-class Factory;
 
 void simulate(
     Factory& factory,

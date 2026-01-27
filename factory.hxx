@@ -5,7 +5,7 @@
 #include <utility>
 #include <map>
 #include <stdexcept>
-#include"nodes.hxx"
+#include "nodes.hxx"
 
 template <typename Node>
 class NodeCollection {
@@ -63,6 +63,10 @@ public:
     NodeCollection<Worker>::const_iterator worker_cbegin() const;
     NodeCollection<Worker>::const_iterator worker_cend() const;
 
+    // Szukanie workerów
+    NodeCollection<Worker>::iterator find_worker_by_id(ElementID id);
+    NodeCollection<Worker>::const_iterator find_worker_by_id(ElementID id) const;
+
     // Magazyny – iteratory
     NodeCollection<Storehouse>::const_iterator storehouse_cbegin() const;
     NodeCollection<Storehouse>::const_iterator storehouse_cend() const;
@@ -84,6 +88,11 @@ public:
     void do_deliveries(Time t);
     void do_package_passing();
     void do_work(Time t);
+
+    // Dostęp do kolekcji (używane w raportach)
+    const NodeCollection<Ramp>& get_ramps() const { return ramps_; }
+    const NodeCollection<Worker>& get_workers() const { return workers_; }
+    const NodeCollection<Storehouse>& get_storehouses() const { return storehouses_; }
 
 private:
     NodeCollection<Ramp> ramps_;

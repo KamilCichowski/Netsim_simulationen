@@ -1,5 +1,6 @@
 #include "helpers.hxx"
 #include "factory.hxx"
+#include "types.hxx"
 
 #include <cstdlib>
 #include <random>
@@ -9,11 +10,32 @@
 #include <stdexcept>
 
 static const std::map<std::string, ElementType> element_map {
-        {"RAMP", ElementType::RAMP},
+        {"LOADING_RAMP", ElementType::RAMP},
         {"WORKER", ElementType::WORKER},
         {"STOREHOUSE", ElementType::STOREHOUSE},
         {"LINK", ElementType::LINK}
 };
+
+namespace {
+
+struct ParsedEndpoint {
+    std::string type;
+    ElementID id;
+};
+
+ParsedEndpoint parse_endpoint(const std::string& value) {
+    auto dash_pos = value.find('-');
+    if (dash_pos == std::string::npos || dash_pos == 0 || dash_pos + 1 >= value.size()) {
+        throw std::logic_error("Invalid endpoint format (expected type-id)");
+    }
+
+    ParsedEndpoint ep;
+    ep.type = value.substr(0, dash_pos);
+    ep.id = static_cast<ElementID>(std::stoi(value.substr(dash_pos + 1)));
+    return ep;
+}
+
+} // unnamed namespace
 
 ParsedLineData parse_line(const std::string& line) {
     std::istringstream ss(line);
@@ -46,13 +68,13 @@ Factory load_factory_structure(std::istream& is) {
     std::string line;
 
     while (std::getline(is, line)) {
-        if (line.empty() || line[0] == '#')
+        if (line.empty() || line[0] == '#' || line[0] == ';')
             continue;
 
         auto data = parse_line(line);
 
         switch (data.element_type) {
-            case ElementType::RAMP: {
+        case ElementType::RAMP: {
                 ElementID id = std::stoi(data.params.at("id"));
                 Time t = std::stoi(data.params.at("delivery-interval"));
                 factory.add_ramp(Ramp{id, t});
@@ -61,7 +83,23 @@ Factory load_factory_structure(std::istream& is) {
             case ElementType::WORKER: {
                 ElementID id = std::stoi(data.params.at("id"));
                 Time t = std::stoi(data.params.at("processing-time"));
-                factory.add_worker(Worker{id, t});
+
+                // Domyślny typ kolejki to FIFO; można go nadpisać parametrem "queue-type".
+                PackageQueueType queue_type = PackageQueueType::FIFO;
+                auto qt_it = data.params.find("queue-type");
+                if (qt_it != data.params.end()) {
+                    if (qt_it->second == "FIFO") {
+                        queue_type = PackageQueueType::FIFO;
+                    } else if (qt_it->second == "LIFO") {
+                        queue_type = PackageQueueType::LIFO;
+                    } else {
+                        throw std::logic_error("Unknown queue-type");
+                    }
+                }
+
+                factory.add_worker(
+                    Worker(id, t, std::make_unique<PackageQueue>(queue_type))
+                );
                 break;
             }
             case ElementType::STOREHOUSE: {
@@ -70,35 +108,45 @@ Factory load_factory_structure(std::istream& is) {
                 break;
             }
             case ElementType::LINK: {
-                ElementID src = std::stoi(data.params.at("src"));
-                ElementID dest = std::stoi(data.params.at("dest"));
+                // src and dest are in the format type-id, e.g. ramp-1, worker-2, store-1
+                ParsedEndpoint src_ep = parse_endpoint(data.params.at("src"));
+                ParsedEndpoint dest_ep = parse_endpoint(data.params.at("dest"));
 
                 IPackageReceiver* receiver = nullptr;
 
-                auto w_it = factory.find_worker_by_id(dest);
-                if (w_it != factory.worker_cend()) {
-                    receiver = &(*w_it);
-                } else {
-                    auto s_it = factory.find_storehouse_by_id(dest);
+                if (dest_ep.type == "worker") {
+                    auto w_it = factory.find_worker_by_id(dest_ep.id);
+                    if (w_it != factory.worker_cend()) {
+                        receiver = &(*w_it);
+                    }
+                } else if (dest_ep.type == "store") {
+                    auto s_it = factory.find_storehouse_by_id(dest_ep.id);
                     if (s_it != factory.storehouse_cend()) {
                         receiver = &(*s_it);
                     }
+                } else {
+                    throw std::logic_error("Invalid LINK destination type");
                 }
 
                 if (receiver == nullptr) {
                     throw std::logic_error("Invalid LINK destination");
                 }
 
-                auto r_it = factory.find_ramp_by_id(src);
-                if (r_it != factory.ramp_cend()) {
-                    r_it->add_receiver(receiver);
-                    break;
-                }
-
-                auto wsrc_it = factory.find_worker_by_id(src);
-                if (wsrc_it != factory.worker_cend()) {
-                    wsrc_it->add_receiver(receiver);
-                    break;
+                // Source must be a sender: ramp or worker
+                if (src_ep.type == "ramp") {
+                    auto r_it = factory.find_ramp_by_id(src_ep.id);
+                    if (r_it != factory.ramp_cend()) {
+                        r_it->add_receiver(receiver);
+                        break;
+                    }
+                } else if (src_ep.type == "worker") {
+                    auto wsrc_it = factory.find_worker_by_id(src_ep.id);
+                    if (wsrc_it != factory.worker_cend()) {
+                        wsrc_it->add_receiver(receiver);
+                        break;
+                    }
+                } else {
+                    throw std::logic_error("Invalid LINK source type");
                 }
 
                 throw std::logic_error("Invalid LINK source");
@@ -112,7 +160,7 @@ Factory load_factory_structure(std::istream& is) {
 
 void save_factory_structure(const Factory& factory, std::ostream& os) {
     for (auto it = factory.ramp_cbegin(); it != factory.ramp_cend(); ++it) {
-        os << "RAMP id=" << it->get_id()
+        os << "LOADING_RAMP id=" << it->get_id()
            << " delivery-interval=" << it->get_delivery_interval()
            << "\n";
     }
@@ -120,6 +168,7 @@ void save_factory_structure(const Factory& factory, std::ostream& os) {
     for (auto it = factory.worker_cbegin(); it != factory.worker_cend(); ++it) {
         os << "WORKER id=" << it->get_id()
            << " processing-time=" << it->get_processing_time()
+           << " queue-type=" << to_string(it->get_queue_type())
            << "\n";
     }
 
@@ -129,22 +178,26 @@ void save_factory_structure(const Factory& factory, std::ostream& os) {
 
     os.flush();
 
+    // Save LINKS using typed endpoints: ramp-<id>, worker-<id>, store-<id>
     for (auto it = factory.ramp_cbegin(); it != factory.ramp_cend(); ++it) {
         for (const auto& [receiver, _] : it->receiver_preferences_) {
-            os << "LINK src=" << it->get_id()
-               << " dest=" << receiver->get_id()
+            std::string dest_type =
+                (receiver->get_receiver_type() == ReceiverType::STOREHOUSE) ? "store" : "worker";
+            os << "LINK src=ramp-" << it->get_id()
+               << " dest=" << dest_type << "-" << receiver->get_id()
                << "\n";
         }
     }
 
     for (auto it = factory.worker_cbegin(); it != factory.worker_cend(); ++it) {
         for (const auto& [receiver, _] : it->receiver_preferences_) {
-            os << "LINK src=" << it->get_id()
-               << " dest=" << receiver->get_id()
+            std::string dest_type =
+                (receiver->get_receiver_type() == ReceiverType::STOREHOUSE) ? "store" : "worker";
+            os << "LINK src=worker-" << it->get_id()
+               << " dest=" << dest_type << "-" << receiver->get_id()
                << "\n";
         }
     }
-
 }
 
 

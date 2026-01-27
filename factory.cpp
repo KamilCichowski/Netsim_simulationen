@@ -40,6 +40,14 @@ NodeCollection<Storehouse>::const_iterator Factory::storehouse_cend() const {
     return storehouses_.cend();
 }
 
+NodeCollection<Worker>::iterator Factory::find_worker_by_id(ElementID id) {
+    return workers_.find_by_id(id);
+}
+
+NodeCollection<Worker>::const_iterator Factory::find_worker_by_id(ElementID id) const {
+    return workers_.find_by_id(id);
+}
+
 NodeCollection<Storehouse>::iterator Factory::find_storehouse_by_id(ElementID id) {
     return storehouses_.find_by_id(id);
 }

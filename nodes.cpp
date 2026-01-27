@@ -1,6 +1,6 @@
 #include "nodes.hxx"
 
-void ReceiverPreferences::add_(IPackageReceiver* receiver) {
+void ReceiverPreferences::add_receiver(IPackageReceiver* receiver) {
     const std::size_t old_count = preferences_.size();
 
     if (old_count == 0) {
@@ -34,6 +34,19 @@ void ReceiverPreferences::remove_receiver(IPackageReceiver* receiver) {
     }
 
     preferences_.erase(receiver);
+}
+
+void ReceiverPreferences::remove_receiver(ElementID id) {
+    IPackageReceiver* found = nullptr;
+    for (auto& entry : preferences_) {
+        if (entry.first->get_id() == id) {
+            found = entry.first;
+            break;
+        }
+    }
+    if (found != nullptr) {
+        remove_receiver(found);
+    }
 }
 
 IPackageReceiver* ReceiverPreferences::choose_receiver() {
@@ -86,6 +99,7 @@ void Worker::do_work(Time current) {
 
         if (!q_->empty()) {
             bufor_.emplace(q_->pop());
+            t_ = current;
         }
     }
 }
@@ -99,14 +113,9 @@ void Storehouse::receive_package(Package&& pkg) {
 }
 
 void Ramp::deliver_goods(Time current) {
-    if (!bufor_) {
-        push_package(Package());
-        bufor_.emplace(id_);
-        t_ = current;
-        return;
-    }
-
-    if (current - di_ == t_) {
+    // Dostarcza paczki w stałych odstępach czasu równych di_,
+    // począwszy od pierwszej jednostki czasu.
+    if ((current - 1) % di_ == 0) {
         push_package(Package());
     }
 }

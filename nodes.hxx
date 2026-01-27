@@ -1,16 +1,15 @@
+#pragma once
+#ifndef NODES_HXX
+#define NODES_HXX
 
-
-#include "package.hxx"
 #include "types.hxx"
+#include "package.hxx"
 #include "storage_types.hxx"
 #include "helpers.hxx"
 #include <memory>
 #include <map>
 #include <optional>
 #include <utility>
-
-
-
 class IPackageReceiver {
 public:
     virtual void receive_package(Package&& p) = 0;
@@ -23,9 +22,8 @@ public:
     virtual IPackageStockpile::const_iterator begin() const = 0;
     virtual IPackageStockpile::const_iterator end() const = 0;
 
-#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
+    // Always provide receiver type in this project configuration.
     virtual ReceiverType get_receiver_type() const = 0;
-#endif
 
     virtual ~IPackageReceiver() = default;
 };
@@ -46,9 +44,12 @@ public:
 
     void add_receiver(IPackageReceiver *r);
     void remove_receiver(IPackageReceiver *r);
+    void remove_receiver(ElementID id);
     IPackageReceiver *choose_receiver();
 
     const preferences_t &get_preferences() const { return preferences_; }
+
+    bool empty() const { return preferences_.empty(); }
 
 private:
     preferences_t preferences_;
@@ -90,9 +91,9 @@ public:
     IPackageStockpile::const_iterator begin() const override { return d_->begin(); }
     IPackageStockpile::const_iterator end() const override { return d_->end(); }
 
-#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
     ReceiverType get_receiver_type() const override { return ReceiverType::STOREHOUSE; }
-#endif
+
+    const IPackageStockpile& get_stock() const { return *d_; }
 
 private:
     ElementID id_;
@@ -103,11 +104,12 @@ private:
 class Worker : public IPackageReceiver, public PackageSender {
 public:
     Worker(ElementID id, TimeOffset pd, std::unique_ptr<IPackageQueue> q)
-        : PackageSender(), id_(id), pd_(pd), q_(std::move(q)) {}
+        : PackageSender(), id_(id), pd_(pd), t_(0), q_(std::move(q)) {}
 
     void do_work(Time t);
 
     TimeOffset get_processing_duration() const { return pd_; }
+    TimeOffset get_processing_time() const { return pd_; }
     Time get_package_processing_start_time() const { return t_; }
 
     void receive_package(Package &&p) override;
@@ -120,9 +122,14 @@ public:
     IPackageStockpile::const_iterator begin() const override { return q_->begin(); }
     IPackageStockpile::const_iterator end() const override { return q_->end(); }
 
-#if (defined EXERCISE_ID && EXERCISE_ID != EXERCISE_ID_NODES)
     ReceiverType get_receiver_type() const override { return ReceiverType::WORKER; }
-#endif
+
+    PackageQueueType get_queue_type() const { return q_->get_queue_type(); }
+    const std::optional<Package>& get_processing_buffer() const { return bufor_; }
+    const IPackageQueue* get_queue() const { return q_.get(); }
+
+    // Ułatwienie konfiguracji połączeń – deleguje do ReceiverPreferences.
+    void add_receiver(IPackageReceiver* receiver) { receiver_preferences_.add_receiver(receiver); }
 
 private:
     ElementID id_;
@@ -143,19 +150,12 @@ public:
     TimeOffset get_delivery_interval() const { return di_; }
     ElementID get_id() const { return id_; }
 
+    // Ułatwienie konfiguracji sieci – przekazuje dalej do ReceiverPreferences.
+    void add_receiver(IPackageReceiver* receiver) { receiver_preferences_.add_receiver(receiver); }
+
 private:
     ElementID id_;
     TimeOffset di_;
-    Time t_;
-    std::optional<Package> bufor_ = std::nullopt;
 };
 
-
-
-
-
-
-
-
-
-
+#endif // NODES_HXX

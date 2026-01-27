@@ -6,4 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(Netsim_simulationen main.cpp
         package.cpp
-        storage_types.cpp)
+        storage_types.cpp
+        nodes.cpp
+        factory.cpp
+        helpers.cpp
+        reports.cpp)

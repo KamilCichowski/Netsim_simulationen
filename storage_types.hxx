@@ -1,5 +1,9 @@
-#include "package.hxx"
+#pragma once
+#ifndef STORAGE_TYPES_HXX
+#define STORAGE_TYPES_HXX
+
 #include "types.hxx"
+#include "package.hxx"
 #include <list>
 
 class IPackageStockpile {
@@ -48,3 +52,5 @@ private:
     PackageQueueType type_;
     std::list<Package> packages_;
 };
+
+#endif // STORAGE_TYPES_HXX
